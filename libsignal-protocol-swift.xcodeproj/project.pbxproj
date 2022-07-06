@@ -1774,9 +1774,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE1F0C49203467B3003F1C04 /* Build configuration list for PBXNativeTarget "libsignal-protocol-swift iOS" */;
 			buildPhases = (
+				CE1F0C32203467B3003F1C04 /* Headers */,
 				CE1F0C30203467B3003F1C04 /* Sources */,
 				CE1F0C31203467B3003F1C04 /* Frameworks */,
-				CE1F0C32203467B3003F1C04 /* Headers */,
 				CE1F0C33203467B3003F1C04 /* Resources */,
 			);
 			buildRules = (
@@ -1810,9 +1810,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE1F0C5920346830003F1C04 /* Build configuration list for PBXNativeTarget "libsignal-protocol-swift macOS" */;
 			buildPhases = (
+				CE1F0C5120346830003F1C04 /* Headers */,
 				CE1F0C4F20346830003F1C04 /* Sources */,
 				CE1F0C5020346830003F1C04 /* Frameworks */,
-				CE1F0C5120346830003F1C04 /* Headers */,
 				CE1F0C5220346830003F1C04 /* Resources */,
 			);
 			buildRules = (
@@ -1828,9 +1828,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE1F0C662034685B003F1C04 /* Build configuration list for PBXNativeTarget "libsignal-protocol-swift tvOS" */;
 			buildPhases = (
+				CE1F0C5E2034685B003F1C04 /* Headers */,
 				CE1F0C5C2034685B003F1C04 /* Sources */,
 				CE1F0C5D2034685B003F1C04 /* Frameworks */,
-				CE1F0C5E2034685B003F1C04 /* Headers */,
 				CE1F0C5F2034685B003F1C04 /* Resources */,
 			);
 			buildRules = (
@@ -1846,9 +1846,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE1F0C7320346875003F1C04 /* Build configuration list for PBXNativeTarget "libsignal-protocol-swift watchOS" */;
 			buildPhases = (
+				CE1F0C6B20346875003F1C04 /* Headers */,
 				CE1F0C6920346875003F1C04 /* Sources */,
 				CE1F0C6A20346875003F1C04 /* Frameworks */,
-				CE1F0C6B20346875003F1C04 /* Headers */,
 				CE1F0C6C20346875003F1C04 /* Resources */,
 			);
 			buildRules = (

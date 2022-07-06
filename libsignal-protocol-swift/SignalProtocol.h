@@ -14,5 +14,5 @@ FOUNDATION_EXPORT double libsignal_protocol_swiftVersionNumber;
 //! Project version string for libsignal_protocol_swift.
 FOUNDATION_EXPORT const unsigned char libsignal_protocol_swiftVersionString[];
 
-#include "setup.h"
+#include "Setup/setup.h"
 
