@@ -32,6 +32,8 @@ public struct Signature {
         guard keyDecodeResult == 0 else {
             return .failure(.keyDecodeError(SignalError(value: keyDecodeResult)))
         }
+        defer { ec_private_key_destroy(privKey) }
+
         var signatureBuf: OpaquePointer? = nil
         let signResult = withUnsafeMutablePointer(to: &signatureBuf) { signatureBufPtr in
             return payload.withUnsafeBytes {
@@ -55,6 +57,7 @@ public struct Signature {
         return .success(Data(signalBuffer: signatureBuf))
     }
 
+    // publicKey : taken from KeyPair
     public static func verify(signature: Data, for payload: Data, withPublicKey publicKey: Data) -> Result<Bool, SignatureError> {
 
         // Convert public key
@@ -66,9 +69,11 @@ public struct Signature {
         let keyDecodeResult = withUnsafeMutablePointer(to: &pubKey) {
             curve_decode_point($0, pubData, pubLength, Signal.context)
         }
+
         guard keyDecodeResult == 0 else {
             return .failure(.keyDecodeError(SignalError(value: keyDecodeResult)))
         }
+        defer { ec_public_key_destroy(pubKey) }
 
         let verifyRes = signature.withUnsafeBytes { signaturePtr in
             payload.withUnsafeBytes { payloadPtr in
