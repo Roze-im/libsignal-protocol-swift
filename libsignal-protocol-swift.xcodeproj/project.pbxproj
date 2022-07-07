@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320E84BE2875BF780086E66A /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320E84BD2875BF780086E66A /* Signature.swift */; };
+		320E84BF2875BF780086E66A /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320E84BD2875BF780086E66A /* Signature.swift */; };
+		320E84C02875BF780086E66A /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320E84BD2875BF780086E66A /* Signature.swift */; };
+		320E84C12875BF780086E66A /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320E84BD2875BF780086E66A /* Signature.swift */; };
+		320E84C32875C3E50086E66A /* SignatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320E84C22875C3E50086E66A /* SignatureTests.swift */; };
 		CE048C342036F890002AB31C /* SignalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048C332036F890002AB31C /* SignalError.swift */; };
 		CE048C352036F890002AB31C /* SignalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048C332036F890002AB31C /* SignalError.swift */; };
 		CE048C362036F890002AB31C /* SignalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048C332036F890002AB31C /* SignalError.swift */; };
@@ -814,6 +819,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		320E84BD2875BF780086E66A /* Signature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
+		320E84C22875C3E50086E66A /* SignatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureTests.swift; sourceTree = "<group>"; };
 		A060453525ED4AF10063391D /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		A060458525ED4D760063391D /* SignalProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalProtocolTests.swift; sourceTree = "<group>"; };
 		A060458725ED4D760063391D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1123,6 +1130,7 @@
 			children = (
 				CEEDDA7D203663D4000A0A98 /* TestImplementation */,
 				CE1F0C43203467B3003F1C04 /* CipherTests.swift */,
+				320E84C22875C3E50086E66A /* SignatureTests.swift */,
 				CE409A15203AE9C900B7D6A7 /* GroupCipherTests.swift */,
 				CE409A17203AEA3100B7D6A7 /* TestHelper.swift */,
 				CEFD541C203B7EF300EAE28D /* FingerprintTests.swift */,
@@ -1422,6 +1430,7 @@
 				CEE3452820350AF5001FE63B /* SignalAddress.swift */,
 				CE048C332036F890002AB31C /* SignalError.swift */,
 				CEE3455F20351612001FE63B /* SignalSenderKeyName.swift */,
+				320E84BD2875BF780086E66A /* Signature.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -1985,6 +1994,7 @@
 				CE1F0DF120346A19003F1C04 /* gen_labelset.c in Sources */,
 				CE1F0DDD20346A19003F1C04 /* gen_x.c in Sources */,
 				CECF5C9A2035B2BA004A4D28 /* Signal.swift in Sources */,
+				320E84BE2875BF780086E66A /* Signature.swift in Sources */,
 				CE1F0D6D20346A19003F1C04 /* fe_sq2.c in Sources */,
 				CE1F0EFD20346A19003F1C04 /* open.c in Sources */,
 				CE7345B72037AC3E0011C67B /* KeyStoreWrapper.swift in Sources */,
@@ -2093,6 +2103,7 @@
 				CE409A18203AEA3100B7D6A7 /* TestHelper.swift in Sources */,
 				CEEDDA83203666FE000A0A98 /* TestSenderKeyStore.swift in Sources */,
 				CEFD541D203B7EF300EAE28D /* FingerprintTests.swift in Sources */,
+				320E84C32875C3E50086E66A /* SignatureTests.swift in Sources */,
 				CE409A16203AE9C900B7D6A7 /* GroupCipherTests.swift in Sources */,
 				CEEDDA7F203663EB000A0A98 /* TestIdentityStore.swift in Sources */,
 				CEEDDA8720366963000A0A98 /* TestSignedPrekeyStore.swift in Sources */,
@@ -2133,6 +2144,7 @@
 				CE1F0DF220346A19003F1C04 /* gen_labelset.c in Sources */,
 				CE1F0DDE20346A19003F1C04 /* gen_x.c in Sources */,
 				CE1F0D6E20346A19003F1C04 /* fe_sq2.c in Sources */,
+				320E84BF2875BF780086E66A /* Signature.swift in Sources */,
 				CE048C3A2036FDB1002AB31C /* SessionPreKeyBundle.swift in Sources */,
 				CE1F0EFE20346A19003F1C04 /* open.c in Sources */,
 				CE7345B82037AC3E0011C67B /* KeyStoreWrapper.swift in Sources */,
@@ -2265,6 +2277,7 @@
 				CE1F0DF320346A19003F1C04 /* gen_labelset.c in Sources */,
 				CE1F0DDF20346A19003F1C04 /* gen_x.c in Sources */,
 				CE1F0D6F20346A19003F1C04 /* fe_sq2.c in Sources */,
+				320E84C02875BF780086E66A /* Signature.swift in Sources */,
 				CE048C382036FDB1002AB31C /* SessionPreKeyBundle.swift in Sources */,
 				CE1F0EFF20346A19003F1C04 /* open.c in Sources */,
 				CE7345B92037AC3E0011C67B /* KeyStoreWrapper.swift in Sources */,
@@ -2397,6 +2410,7 @@
 				CE1F0DF420346A19003F1C04 /* gen_labelset.c in Sources */,
 				CE1F0DE020346A19003F1C04 /* gen_x.c in Sources */,
 				CE1F0D7020346A19003F1C04 /* fe_sq2.c in Sources */,
+				320E84C12875BF780086E66A /* Signature.swift in Sources */,
 				CE048C392036FDB1002AB31C /* SessionPreKeyBundle.swift in Sources */,
 				CE1F0F0020346A19003F1C04 /* open.c in Sources */,
 				CE7345BA2037AC3E0011C67B /* KeyStoreWrapper.swift in Sources */,
