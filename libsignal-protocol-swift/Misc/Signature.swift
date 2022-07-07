@@ -12,6 +12,7 @@ import SignalModule
 public struct Signature {
     public enum SignatureError: Error {
         case signError(SignalError)
+        case verifyError(SignalError)
         case nilSignatureBuffer
         case keyDecodeError(SignalError)
     }
@@ -54,8 +55,34 @@ public struct Signature {
         return .success(Data(signalBuffer: signatureBuf))
     }
 
+    public static func verify(signature: Data, for payload: Data, withPublicKey publicKey: Data) -> Result<Bool, SignatureError> {
 
-    public static func verify(signature: Data, for payload: Data, withPublicKey publicKey: Data) -> Bool {
-        return false
+        // Convert public key
+        let publicBuffer = publicKey.signalBuffer
+        defer { signal_buffer_free(publicBuffer) }
+        let pubLength = signal_buffer_len(publicBuffer)
+        let pubData = signal_buffer_data(publicBuffer)!
+        var pubKey: OpaquePointer? = nil
+        let keyDecodeResult = withUnsafeMutablePointer(to: &pubKey) {
+            curve_decode_point($0, pubData, pubLength, Signal.context)
+        }
+        guard keyDecodeResult == 0 else {
+            return .failure(.keyDecodeError(SignalError(value: keyDecodeResult)))
+        }
+
+        let verifyRes = signature.withUnsafeBytes { signaturePtr in
+            payload.withUnsafeBytes { payloadPtr in
+                return curve_verify_signature(pubKey,
+                                              payloadPtr,
+                                              payload.count,
+                                              signaturePtr,
+                                              signature.count)
+            }
+        }
+
+        if verifyRes < 0 {
+            return .failure(.verifyError(SignalError(value: verifyRes)))
+        }
+        return .success(verifyRes == 0)
     }
 }

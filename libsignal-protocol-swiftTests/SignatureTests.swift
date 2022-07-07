@@ -23,8 +23,40 @@ class SignatureTests: XCTestCase {
         }
 
         let payload: Data = "test".data(using: .utf8)!
-        let signature = Signature.sign(payload: payload, withPrivateKey: identity.privateKey)
-        XCTAssertTrue(Signature.verify(signature: signature, for: payload, withPublicKey: identity.publicKey))
-        XCTAssertFalse(Signature.verify(signature: signature, for: payload, withPublicKey: identity.privateKey))
+        var signature: Data = Data()
+        switch Signature.sign(payload: payload, withPrivateKey: identity.privateKey) {
+        case .success(let sign):
+            signature = sign
+        case .failure(let error):
+            XCTFail("sign failure: \(error)")
+        }
+
+        // empty signature : should return false
+        var res =  Signature.verify(signature: Data(), for: payload, withPublicKey: identity.publicKey)
+        switch res {
+        case .success(let success):
+            XCTAssertFalse(success)
+        case .failure(.verifyError(let error)):
+            XCTAssertEqual(error, SignalError.invalidArgument)
+        default:
+            XCTFail("unexpected outcome for verify : \(res)")
+        }
+
+
+        switch Signature.verify(signature: signature, for: payload, withPublicKey: identity.publicKey){
+        case .success(let success):
+            XCTAssertTrue(success)
+        case .failure(let failure):
+            XCTFail("verify  failure : \(failure)")
+        }
+
+        res = Signature.verify(signature: signature, for: payload, withPublicKey: identity.privateKey)
+        switch res {
+        case .failure(.keyDecodeError(let error)):
+            XCTAssertEqual(error, SignalError.invalidKey)
+        break
+        default:
+            XCTFail("unexpected verify with wrong key outcome : \(res)")
+        }
     }
 }
