@@ -14,6 +14,7 @@ public struct Signature {
         case signError(SignalError)
         case verifyError(SignalError)
         case nilSignatureBuffer
+        case emptySignalBufferData
         case keyDecodeError(SignalError)
     }
 
@@ -24,7 +25,9 @@ public struct Signature {
         let privateBuffer = privateKey.signalBuffer
         defer { signal_buffer_free(privateBuffer) }
         let privLength = signal_buffer_len(privateBuffer)
-        let privData = signal_buffer_data(privateBuffer)!
+        guard let privData = signal_buffer_data(privateBuffer) else {
+            return .failure(.emptySignalBufferData)
+        }
         var privKey: OpaquePointer? = nil
         let keyDecodeResult = withUnsafeMutablePointer(to: &privKey) {
             curve_decode_private_point($0, privData, privLength, Signal.context)
@@ -36,13 +39,13 @@ public struct Signature {
 
         var signatureBuf: OpaquePointer? = nil
         let signResult = withUnsafeMutablePointer(to: &signatureBuf) { signatureBufPtr in
-            return payload.withUnsafeBytes {
+            return payload.withUnsafeBytes { (payloadRawBufPtr : UnsafeRawBufferPointer) in
                 return curve_calculate_signature(
                     Signal.context,
                     signatureBufPtr,
                     privKey,
-                    $0,
-                    payload.count)
+                    payloadRawBufPtr.baseAddress,
+                    payloadRawBufPtr.count)
             }
         }
 
@@ -64,7 +67,9 @@ public struct Signature {
         let publicBuffer = publicKey.signalBuffer
         defer { signal_buffer_free(publicBuffer) }
         let pubLength = signal_buffer_len(publicBuffer)
-        let pubData = signal_buffer_data(publicBuffer)!
+        guard let pubData = signal_buffer_data(publicBuffer) else {
+            return .failure(.emptySignalBufferData)
+        }
         var pubKey: OpaquePointer? = nil
         let keyDecodeResult = withUnsafeMutablePointer(to: &pubKey) {
             curve_decode_point($0, pubData, pubLength, Signal.context)
@@ -75,13 +80,14 @@ public struct Signature {
         }
         defer { ec_public_key_destroy(pubKey) }
 
-        let verifyRes = signature.withUnsafeBytes { signaturePtr in
-            payload.withUnsafeBytes { payloadPtr in
+        let verifyRes = signature.withUnsafeBytes { (signaturePtr: UnsafeRawBufferPointer) in
+
+            return payload.withUnsafeBytes { (payloadPtr: UnsafeRawBufferPointer) in
                 return curve_verify_signature(pubKey,
-                                              payloadPtr,
-                                              payload.count,
-                                              signaturePtr,
-                                              signature.count)
+                                              payloadPtr.baseAddress,
+                                              payloadPtr.count,
+                                              signaturePtr.baseAddress,
+                                              signaturePtr.count)
             }
         }
 
