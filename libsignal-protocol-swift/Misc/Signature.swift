@@ -45,7 +45,7 @@ public struct Signature {
                     signatureBufPtr,
                     privKey,
                     payloadRawBufPtr.baseAddress,
-                    payloadRawBufPtr.count)
+                    payload.count) // NSData may overallocate, so we don't want the buffer size, only the "useful" part.
             }
         }
 
@@ -85,9 +85,9 @@ public struct Signature {
             return payload.withUnsafeBytes { (payloadPtr: UnsafeRawBufferPointer) in
                 return curve_verify_signature(pubKey,
                                               payloadPtr.baseAddress,
-                                              payloadPtr.count,
+                                              payload.count, // NSData may overallocate, so we don't want the buffer size, only the "useful" part
                                               signaturePtr.baseAddress,
-                                              signaturePtr.count)
+                                              signature.count) // NSData may overallocate, so we don't want the buffer size, only the "useful" part
             }
         }
 
