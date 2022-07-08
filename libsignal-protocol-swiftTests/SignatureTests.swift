@@ -68,5 +68,14 @@ class SignatureTests: XCTestCase {
             XCTFail("verify  failure : \(failure)")
         }
 
+        // verify with a different public key
+        let otherKeyPair = try! Signal.generateIdentityKeyPair()
+        switch Signature.verify(signature: signature, for: payload, withPublicKey: otherKeyPair.publicKey){
+        case .success(let success):
+            XCTAssertFalse(success)
+        case .failure(let failure):
+            XCTFail("verify  failure : \(failure)")
+        }
+
     }
 }
