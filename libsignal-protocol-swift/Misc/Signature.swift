@@ -94,6 +94,6 @@ public struct Signature {
         if verifyRes < 0 {
             return .failure(.verifyError(SignalError(value: verifyRes)))
         }
-        return .success(verifyRes == 0)
+        return .success(verifyRes == 1)
     }
 }
