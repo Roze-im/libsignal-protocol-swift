@@ -44,6 +44,10 @@ public final class SignalSenderKeyName {
         address.pointee = signal_protocol_sender_key_name(group_id: groupPointer, group_id_len: count, sender: sender.signalAddress.pointee)
     }
 
+    deinit {
+        address.deallocate()
+    }
+
     /**
      Create an a sender key name from a pointer to a libsignal-protocol-c address.
      - parameter address: The pointer to the address
