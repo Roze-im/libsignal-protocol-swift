@@ -29,6 +29,19 @@ public final class Signal {
         self.globalContext = OpaquePointer(con)
     }
 
+    public typealias LogMethod = @convention(c) (
+        _ level: Int32,
+        _ message: UnsafePointer<Int8>?,
+        _ len: Int,
+        _ userData: UnsafeMutableRawPointer?
+    ) -> Void
+
+    public static func setLogMethod(
+        _ method: LogMethod
+    ) {
+        signal_context_set_log_function(Signal.context, method);
+    }
+
     deinit {
         let ptr = UnsafeMutableRawPointer(globalContext)
         signal_destroy(ptr)
