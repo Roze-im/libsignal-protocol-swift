@@ -21,10 +21,10 @@ final class TestSenderKeyStore: SenderKeyStore {
         return true
     }
 
-    func loadSenderKey(for address: SignalSenderKeyName) -> (senderKey: Data, userRecord: Data?)? {
+    func loadSenderKey(for address: SignalSenderKeyName) -> (success: Bool, res: (senderKey: Data, userRecord: Data?)?) {
         guard let key = keys[address] else {
-            return nil
+            return (false, nil)
         }
-        return (key, records[address])
+        return (true, (key, records[address]))
     }
 }

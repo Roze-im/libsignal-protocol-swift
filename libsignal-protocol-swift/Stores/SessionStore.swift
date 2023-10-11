@@ -19,9 +19,9 @@ public protocol SessionStore {
      provided recipient ID + device ID tuple.
 
      - parameter address: The address of the remote client
-     - returns: The session and optional user record, or nil on failure
+     - returns: (success, session and optional user record), or (false, nil) on failure
      */
-    func loadSession(for address: SignalAddress) -> (session: Data, userRecord: Data?)?
+    func loadSession(for address: SignalAddress) -> (success: Bool, res: (session: Data, userRecord: Data?)?)
 
     /**
      Returns all known devices with active sessions for a recipient

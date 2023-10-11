@@ -109,7 +109,13 @@ private func loadSenderKey(
         return SignalError.noSignalAddress.rawValue
     }
 
-    guard let (senderKey, userRecordData) = delegate.loadSenderKey(for: address) else {
+    let (success, res) = delegate.loadSenderKey(for: address)
+
+    guard success else {
+        return SignalError.notSuccessful.rawValue
+    }
+
+    guard let (senderKey, userRecordData) = res else {
         return 0
     }
 

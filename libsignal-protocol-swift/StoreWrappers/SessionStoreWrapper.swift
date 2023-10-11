@@ -77,7 +77,13 @@ func loadSession(
         return SignalError.noSignalAddress.rawValue
     }
 
-    guard let (session, userData) = delegate.loadSession(for: add) else {
+    let (success, res) = delegate.loadSession(for: add)
+
+    guard success else {
+        return SignalError.notSuccessful.rawValue
+    }
+
+    guard let (session, userData) = res else {
         return 0
     }
 

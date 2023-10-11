@@ -32,9 +32,9 @@ public protocol SenderKeyStore {
      (groupId + senderId + deviceId) tuple.
 
      - parameter address: the (groupId + senderId + deviceId) tuple
-     - returns: The sender key and optional user record, or nil on failure
+     - returns: (success, sender key and optional user record), or (false, nil) on failure
      */
-    func loadSenderKey(for address: SignalSenderKeyName) -> (senderKey: Data, userRecord: Data?)?
+    func loadSenderKey(for address: SignalSenderKeyName) -> (success: Bool, res: (senderKey: Data, userRecord: Data?)?)
 
     /**
      Function called to perform cleanup when the data store context is being

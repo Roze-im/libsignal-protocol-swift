@@ -15,11 +15,11 @@ final class TestSessionStore: SessionStore {
 
     private var records = [SignalAddress : Data]()
 
-    func loadSession(for address: SignalAddress) -> (session: Data, userRecord: Data?)? {
+    func loadSession(for address: SignalAddress) -> (success: Bool, res: (session: Data, userRecord: Data?)?) {
         guard let session = sessions[address] else {
-            return nil
+            return (true, nil)
         }
-        return (session, records[address])
+        return (true, (session, records[address]))
     }
 
     func subDeviceSessions(for name: String) -> [Int32]? {
